@@ -41,7 +41,7 @@ This is great for our local development, but way too big to fit in the compresse
 But, to be honest, 34mb is still quite a chunk. Plus, it's definitely big enough that Lambda won't let you edit your function through the AWS console (your package size needs to be less than 3mb for this to work). Really, the chrome binary doesn't have anything to do with the function itself, and so it's kinda just dead weight that we have to wait to upload every time we deploy our functions. What would be really awesome is if there was a way to have the chrome binary exist as a separate piece of code that my function could just connect to when needed.
 
 And **as of November 29th, 2018 all of this is possible via [Lambda Layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).** Awesome. So now we can extract the `chrome-aws-lambda` dependency into its own layer, and this will speed up our time to deploy our functions, make them easier to debug in the AWS console, and expose the layer for use by other Lambdas that might also need to run chrome for one of the other use cases I discussed earlier.
-<!-- 
+
 Alright, enough talking let's see the code.
 
 ## The code
@@ -64,8 +64,6 @@ Alright, enough talking let's see the code.
 **package\_chrome\_binary.sh:**
 
 ```bash
-#!/bin/bash
-
 npm pack node_modules/chrome-aws-lambda/
 mkdir -p nodejs/node_modules/chrome-aws-lambda/
 tar -C nodejs/node_modules/chrome-aws-lambda/ --extract --file chrome-aws-lambda-*.tgz --strip-components=1
@@ -91,4 +89,4 @@ const launchChrome = async () => {
         headless: chromium.headless,
     });
 };
-``` -->
+```
