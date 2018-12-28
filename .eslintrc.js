@@ -15,5 +15,8 @@ module.exports = {
       "experimentalObjectRestSpread": true,
       "jsx": true,
     },
+  },
+  "rules": {
+    "semi": ["error", "always"],
   }
 }
