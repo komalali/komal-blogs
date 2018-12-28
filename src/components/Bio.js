@@ -28,7 +28,7 @@ function Bio() {
               }}
             />
             <p>
-              This is the blog of <strong>{author}</strong>: enthusiastic dog mom, plant dad, and keyboard smasher. 
+              This is the blog of <strong>{author}</strong>: enthusiastic dog mom/plant dad/keyboard smasher. 
               They live in Seattle, WA with their wife, dog and 40+ plant babies. 
               You can follow them on <a href={`https://instagram.com/${social.instagram}`}>Instagram</a> if that's your thing.
             </p>
