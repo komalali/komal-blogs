@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "komal-blogs",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Komal's blog.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Komal Ali <komalsali@gmail.com>",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
@@ -40,7 +40,7 @@
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^1.14.2"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://komal-blogs.netlify.com/",
   "keywords": [
     "gatsby"
   ],
@@ -48,13 +48,13 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/komalali/komal-blogs.git"
   },
   "scripts": {
     "dev": "gatsby develop",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
