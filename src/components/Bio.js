@@ -28,12 +28,9 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives and works in San
-              Francisco building useful things.
-              {` `}
-              <a href={`https://twitter.com/${social.twitter}`}>
-                You should follow him on Twitter
-              </a>
+              This is the blog of <strong>{author}</strong>: enthusiastic dog mom, plant dad, and keyboard smasher. 
+              They live in Seattle, WA with their wife, dog and 40+ plant babies. 
+              You can follow them on <a href={`https://instagram.com/${social.instagram}`}>Instagram</a> if that's your thing.
             </p>
           </div>
         )
