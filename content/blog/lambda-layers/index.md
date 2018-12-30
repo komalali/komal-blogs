@@ -15,7 +15,7 @@ But really, printing to PDF is only one thing you can do with a headless chrome 
 
 ## Prior knowledge
 
-I started out knowing almost nothing. Basically two things:
+I started out with very little knowledge about running headless browsers or AWS. Basically just these two things:
 
 1. I knew that a Lambda function has limits on how big the size of the package that you deploy (50mb compressed) and how long it can run for (15 minutes).
 2. I knew that I had to use a headless browser to create the PDF. [Puppeteer](https://github.com/GoogleChrome/puppeteer) (a Node library that provides a high-level API to run headless chrome) seemed like the best option, as it has a very convenient `Page.toPdf()` function.
@@ -35,8 +35,8 @@ This is great for our local development, but way too big to fit in the compresse
 ## The solution++
 
 * Okay so lucky us! There is already a chrome binary for AWS as a node package called [chrome-aws-lambda](https://www.npmjs.com/package/chrome-aws-lambda). And it is just 34mb! Sweet! That makes it much more likely that we can fit all the required code within the 50mb limit.
-* And cool, there is a serverless option that allows us to exclude certain files and folders from our package, so we can use that to exclude the local chrome version.
-* And fine, I guess we can just check which OS our function is running on, and choose which chrome to use accordingly - that seems straightforward enough.
+* And cool, there is a serverless option that allows us to exclude certain files and folders from our package, so we can use that to exclude the local chrome version (which is where the major bulk of the puppeteer library is).
+* And fine, I guess we can just check which OS our function is running on with `os.platform()`, and choose which chrome to use accordingly - that seems straightforward enough.
 
 But, to be honest, 34mb is still quite a chunk. Plus, it's definitely big enough that Lambda won't let you edit your function through the AWS console (your package size needs to be less than 3mb for this to work). Really, the chrome binary doesn't have anything to do with the function itself, and so it's kinda just dead weight that we have to wait to upload every time we deploy our functions. What would be really awesome is if there was a way to have the chrome binary exist as a separate piece of code that my function could just connect to when needed.
 
@@ -46,24 +46,31 @@ Alright, enough talking let's see the code.
 
 ## The code
 
-**File structure:**
+Coming soon...
+
+<!-- **File structure:** The final file structure of the project is described below. We'll be working our way towards this end goal step by step.
 
 ``` text
 |-src/
-    |-chrome.js
-    |-handler.js
+    |-chrome.js            // Contains chrome interfacing code.
+    |-handler.js           // Contains the functions for our lambda.
 |-chrome-layer/
-    |-serverless.yml
+    |-serverless.yml       // Serverless file for the chrome lambda layer.
 |-tests/
-    |-handler.spec.js
-|-package.json
-|-package_chrome_binary.sh
-|-serverless.yml
+    |-handler.spec.js      // Tests for our lambda handler functions.
+|-package.json             // package.json describing the require npm packages.
+|-package_chrome_binary.sh // Shell script to correctly package chrome-aws-lambda as a layer.
+|-serverless.yml           // Main serverless file for the lambda functions.
+
 ```
+
+There are two serverless.yml files because we are creating two separate cloudformation stacks. This is so we can deploy the chrome binary lambda layer separately, and not have to include the bulk of that library in our regular deployments of our lambda functions. This speeds up the development time considerably.
+
+#### Step 1: Set up project.
 
 **package\_chrome\_binary.sh:**
 
-```bash
+```bash{numberLines: true}
 npm pack node_modules/chrome-aws-lambda/
 mkdir -p nodejs/node_modules/chrome-aws-lambda/
 tar -C nodejs/node_modules/chrome-aws-lambda/ --extract --file chrome-aws-lambda-*.tgz --strip-components=1
@@ -73,7 +80,7 @@ zip -9 --filesync --move --recurse-paths ./chrome-layer/chrome-aws-lambda.layer.
 
 **chrome.js:**
 
-```javascript
+```javascript{numberLines: true}
 const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer');
 const os = require('os');
@@ -89,4 +96,4 @@ const launchChrome = async () => {
         headless: chromium.headless,
     });
 };
-```
+``` -->
