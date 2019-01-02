@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Komal blagues.`,
     author: `Komal Ali`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Komal's thoughts on stuff (and junk).`,
     siteUrl: `https://komal-blogs.netlify.com/`,
     social: {
       instagram: `zwitkali`,
