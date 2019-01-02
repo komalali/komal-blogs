@@ -41,8 +41,8 @@ If you require more fine-grained control that involves using the Devtools protoc
 
 **Recommended use** - Custom, specific or fine-grained browser-related tasks that require direct use of the DevTools protocol.
 
-**Example** - Create a PDF of a page. (For comparison, I am using the same exmaple so you can see the difference in code.)
-```javascript{lineNummbers: true}
+**Example** - Create a PDF of a page. (For comparison, I am using the same example so you can see the difference in code.)
+```javascript{lineNumbers: true}
 const launcher = require('chrome-launcher');
 const CDP = require('chrome-remote-interface');
 const fs = require('fs');
